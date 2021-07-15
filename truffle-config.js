@@ -67,7 +67,14 @@ module.exports = {
       provider: () => new HDWalletProvider(mnemonic, 'http://localhost:7777/'),
       //provider: () => new HDWalletProvider(mnemonic, 'https://public-node.testnet.rsk.co'),
       network_id: 31,
-      gasPrice: 900000000,
+      gasPrice: 67e6,
+      networkCheckTimeout: 10e3
+    },
+    mainnet: {
+      provider: () => new HDWalletProvider(mnemonic, 'http://localhost:7777/'),
+      //provider: () => new HDWalletProvider(mnemonic, 'https://public-node.testnet.rsk.co'),
+      network_id: 30,
+      gasPrice: 67e6,
       networkCheckTimeout: 10e3
     },
     // ropsten: {
