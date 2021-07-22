@@ -5,7 +5,7 @@ const {
   balance,
   constants
 } = require('@openzeppelin/test-helpers')
-const upgrades = require('@openzeppelin/truffle-upgrades')
+const { deployProxy, silenceWarnings } = require('@openzeppelin/truffle-upgrades')
 const { toBN, asciiToHex, padRight } = require('web3-utils')
 const expect = require('chai').expect
 
@@ -18,9 +18,13 @@ contract('Staking', ([randomPerson, staker]) => {
   let storageManager
   let staking
 
+  before(async () => {
+    await silenceWarnings()
+  })
+
   beforeEach(async function () {
     // Deploy Storage Manager
-    storageManager = await upgrades.deployProxy(StorageManager, [], { unsafeAllowCustomTypes: true })
+    storageManager = await deployProxy(StorageManager, [], { unsafeAllowCustomTypes: true })
 
     // Deploy token
     token = await ERC20.new('myToken', 'mT', randomPerson, 100000, { from: randomPerson })
